@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon --watch src --exec \"ts-node src/index.ts\" -e ts"
+    "start":  "nodemon --watch src --exec \"ts-node src/index.ts\" -e ts",
+    "formart":"prettier --write 'src/**/*.{js,ts}' "
   },
   "keywords": [],
   "author": "",

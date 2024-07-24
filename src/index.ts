@@ -1,18 +1,14 @@
 import express from "express";
-import { config } from "dotenv"
+import { config } from "dotenv";
 
-config()
+config();
 
-const app = express()
+const app = express();
 
-const port = process.env.PORT
-
+const port = process.env.PORT;
 
 app.get("/", (req, res) => {
-    res.send("Hello Nanndo")
-})
+  res.send("Hello Nanndo");
+});
 
-
-
-
-app.listen(port, () => console.log(`listening on port ${port}`))
+app.listen(port, () => console.log(`listening on port ${port}`));
