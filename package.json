@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start":  "nodemon --watch src --exec \"ts-node src/index.ts\" -e ts",
-    "formart":"prettier --write 'src/**/*.{js,ts}' "
+    "start": "nodemon --watch src --exec \"ts-node src/index.ts\" -e ts",
+    "formart": "prettier --write 'src/**/*.{js,ts}' "
   },
   "keywords": [],
   "author": "",
@@ -31,6 +31,7 @@
     "typescript-eslint": "^7.17.0"
   },
   "dependencies": {
-    "express": "^4.19.2"
+    "express": "^4.19.2",
+    "mongodb": "^6.8.0"
   }
 }
