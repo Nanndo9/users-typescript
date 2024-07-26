@@ -1,5 +1,7 @@
-import express from "express";
-import { config } from "dotenv";
+import express, { Response, Request } from 'express';
+import { config } from 'dotenv';
+import { GetUsersController } from './controllers/get-users/get-users';
+import { MongoGetUsersRepository } from './repositories/get-users/mongo-get-users';
 
 config();
 
@@ -7,8 +9,13 @@ const app = express();
 
 const port = process.env.PORT;
 
-app.get("/", (req, res) => {
-  res.send("Hello Nanndo");
+app.get('/users', async (req: Request, res: Response) => {
+    const mongoGetUsersRepository = new MongoGetUsersRepository();
+    const getUsersController = new GetUsersController(
+        mongoGetUsersRepository
+    );
+    const { body, statusCode } = await getUsersController.handle();
+    res.send(body).status(statusCode);
 });
 
 app.listen(port, () => console.log(`listening on port ${port}`));
