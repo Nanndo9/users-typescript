@@ -8,10 +8,10 @@ import { CreateUserController } from './controllers/create-user/create-user';
 
 const main = async () => {
     const app = express();
-   app.use(express.json())
+    app.use(express.json());
     config();
     await MongoClient.connect();
-    app.get('/get', async (req: Request, res: Response) => {
+    app.get('/users', async (req: Request, res: Response) => {
         const mongoGetUsersRepository = new MongoGetUsersRepository();
 
         const getUsersController = new GetUsersController(
@@ -22,7 +22,7 @@ const main = async () => {
         res.send(body).status(statusCode);
     });
 
-    app.post('/users', async(req: Request, res: Response) => {
+    app.post('/users', async (req: Request, res: Response) => {
         const mongoCreateUserRepository = new MongoCreateUserRepository();
         const createUserController = new CreateUserController(
             mongoCreateUserRepository
@@ -32,7 +32,7 @@ const main = async () => {
             body: req.body,
         });
 
-        res.send(body).status(statusCode)
+        res.status(statusCode).send(body);
     });
 
     const port = process.env.PORT;
