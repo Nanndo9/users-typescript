@@ -5,7 +5,8 @@ import {
 import { MongoClient } from '../../database/mongo';
 import { User } from '../../models/user';
 
-class MongoCreateUser implements ICreateUserRepostirory {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export class MongoCreateUserRepository implements ICreateUserRepostirory {
     async createUser(params: createUserParams): Promise<User> {
         const { insertedId } = await MongoClient.db
             .collection('users')
