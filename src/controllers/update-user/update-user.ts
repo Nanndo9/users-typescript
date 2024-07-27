@@ -1,5 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { User } from '../../models/user';
-import { createUserParams } from '../create-user/protocols';
 import { HttpRequest, HttpResponse } from '../protocols';
 import {
     IUpdateUserController,
@@ -36,10 +36,10 @@ export class UpdateUserController implements IUpdateUserController {
                 };
             }
             const user = await this.updateUserRepository.updateUser(id, body);
-            return{
-                statusCode:200,
-                body:user
-            }
+            return {
+                statusCode: 200,
+                body: user,
+            };
         } catch (error) {
             return {
                 statusCode: 500,
