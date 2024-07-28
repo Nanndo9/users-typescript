@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export interface HttpResponse<T> {
     statusCode: number;
-    body: T | string;
+    body: T;
 }
 
 export interface HttpRequest<B> {
@@ -11,5 +11,5 @@ export interface HttpRequest<B> {
 }
 
 export interface Icontroller {
-    handle(HttpRequest:HttpRequest<unknown>):Promise<HttpResponse<unknown>>
+    handle(HttpRequest: HttpRequest<unknown>): Promise<HttpResponse<unknown>>;
 }

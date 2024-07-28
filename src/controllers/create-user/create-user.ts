@@ -2,10 +2,8 @@ import validator from 'validator';
 
 import { User } from '../../models/user';
 import { HttpRequest, HttpResponse, Icontroller } from '../protocols';
-import {
-    createUserParams,
-    ICreateUserRepostirory,
-} from './protocols';
+import { createUserParams, ICreateUserRepostirory } from './protocols';
+import { badRequest, created, internalServerError } from '../helpers';
 
 export class CreateUserController implements Icontroller {
     constructor(
@@ -13,7 +11,7 @@ export class CreateUserController implements Icontroller {
     ) {}
     async handle(
         httpRequest: HttpRequest<createUserParams>
-    ): Promise<HttpResponse<User>> {
+    ): Promise<HttpResponse<User | string>> {
         try {
             const requiredFields = [
                 'firstName',
@@ -26,33 +24,21 @@ export class CreateUserController implements Icontroller {
                     !httpRequest?.body?.[field as keyof createUserParams]
                         ?.length
                 ) {
-                    return {
-                        statusCode: 400,
-                        body: `Field ${field} is required`,
-                    };
+                    return badRequest(`Field ${field} is required`);
                 }
             }
             const emailIsValide = validator.isEmail(httpRequest.body!.email);
             if (!emailIsValide) {
-                return {
-                    statusCode: 400,
-                    body: 'E-mail is invalid',
-                };
+                return badRequest('E-mail is invalid');
             }
 
             const user = await this.createUserRepository.createUser(
                 httpRequest.body!
             );
 
-            return {
-                statusCode: 201,
-                body: user,
-            };
+            return created<User>(user);
         } catch (error) {
-            return {
-                statusCode: 500,
-                body: 'Something went wrong',
-            };
+            return internalServerError();
         }
     }
 }

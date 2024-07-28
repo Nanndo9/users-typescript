@@ -9,11 +9,15 @@ import { MongoUpdateUserRepository } from './repositories/update-user/mongo-upda
 import { UpdateUserController } from './controllers/update-user/update-user';
 import { MOngoDeleteRepository } from './repositories/delete-user/mongo-delete-user';
 import { DeleteUserController } from './controllers/delete-user/delete-user';
+
+
 const main = async () => {
     const app = express();
     app.use(express.json());
     config();
     await MongoClient.connect();
+
+
     app.get('/users', async (req: Request, res: Response) => {
         const mongoGetUsersRepository = new MongoGetUsersRepository();
 
