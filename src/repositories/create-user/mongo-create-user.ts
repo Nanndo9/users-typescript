@@ -4,6 +4,7 @@ import {
 } from '../../controllers/create-user/protocols';
 import { MongoClient } from '../../database/mongo';
 import { User } from '../../models/user';
+import { MongoUser } from '../mongo-protocols';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export class MongoCreateUserRepository implements ICreateUserRepostirory {
@@ -13,7 +14,7 @@ export class MongoCreateUserRepository implements ICreateUserRepostirory {
             .insertOne(params);
 
         const user = await MongoClient.db
-            .collection<Omit<User, 'id'>>('users')
+            .collection<MongoUser>('users')
             .findOne({ _id: insertedId });
 
         if (!user) {
