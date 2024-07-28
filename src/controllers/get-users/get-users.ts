@@ -1,6 +1,7 @@
-import { IgetUsersController, IgetUsersRepository } from './protocols';
+import { Icontroller } from '../protocols';
+import {IgetUsersRepository } from './protocols';
 
-export class GetUsersController implements IgetUsersController {
+export class GetUsersController implements Icontroller {
     constructor(private readonly getUsersRepository: IgetUsersRepository) {
         this.getUsersRepository = getUsersRepository;
     }
